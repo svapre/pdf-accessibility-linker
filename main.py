@@ -14,10 +14,10 @@ from core.annotator import EnterpriseAnnotator
 
 load_dotenv()
 
-class UPSCImprovementEngine:
+class PDFAccessibilityEngine:
     """
-    Orchestrates the 5-phase compilation of a static PDF into a 
-    semantically hyperlinked UPSC study resource.
+    Orchestrates the 5-phase compilation of a static PDF into a
+    semantically hyperlinked and reference-linked resource.
     """
 
     def __init__(self, api_key: str, debug: bool = False, allow_partial: bool = False, reprofile: bool = False, mode: str = "full", vocab_override: str = None):
@@ -154,7 +154,7 @@ class UPSCImprovementEngine:
         queue = sorted(glob.glob(os.path.join(self.input_dir, "*.pdf")))
         
         if not queue:
-            logger.warning("Queue empty. Place UPSC PDFs in /input to begin.")
+            logger.warning("Queue empty. Place PDFs in /input to begin.")
             return
 
         logger.info("BATCH_INITIALIZED: Processing %d documents.", len(queue))
@@ -195,7 +195,7 @@ if __name__ == "__main__":
     raw_env_key = os.getenv("GEMINI_API_KEY")
     env_key = raw_env_key.strip() if raw_env_key else None
 
-    parser = argparse.ArgumentParser(description="UPSC PDF Improvement Engine")
+    parser = argparse.ArgumentParser(description="PDF Accessibility and Link Enhancement Engine")
     parser.add_argument("--key", default=env_key, help="Gemini API key. Overrides the GEMINI_API_KEY value in .env")
     parser.add_argument("--debug", action="store_true", help="Enable verbose diagnostic logging including all AST nodes and phase artifacts")
     parser.add_argument("--allow-partial", action="store_true", help="Continue pipeline even if a phase produces incomplete results. Use for testing only")
@@ -238,7 +238,7 @@ if __name__ == "__main__":
         if pending_count > 0:
             pending_msg = f"\n  Pending review: {pending_count} documents | Batches: {batch_count} | See config/manual_review/"
 
-        logger.info("Starting UPSC PDF Improvement Engine\n"
+        logger.info("Starting PDF Accessibility and Link Enhancement Engine\n"
                     "  Mode          : %s\n"
                     "  Debug         : %s\n"
                     "  Allow-partial : %s\n"
@@ -258,5 +258,6 @@ if __name__ == "__main__":
                     os.path.join(root_dir, "config"),
                     pending_msg)
         
-        engine = UPSCImprovementEngine(final_key, debug=args.debug, allow_partial=args.allow_partial, reprofile=args.reprofile, mode=args.mode, vocab_override=args.vocab)
+        engine = PDFAccessibilityEngine(final_key, debug=args.debug, allow_partial=args.allow_partial, reprofile=args.reprofile, mode=args.mode, vocab_override=args.vocab)
         engine.run_batch()
+

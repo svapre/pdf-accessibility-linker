@@ -3,7 +3,7 @@ from core.indexer import EnterpriseIndexer
 from core.miner import EnterpriseMiner
 from core.profiler import EnterpriseProfiler
 from core.resolver import EnterpriseResolver
-from main import UPSCImprovementEngine
+from main import PDFAccessibilityEngine
 
 
 def test_pipeline_core_symbols_are_importable():
@@ -12,4 +12,4 @@ def test_pipeline_core_symbols_are_importable():
     assert EnterpriseMiner is not None
     assert EnterpriseResolver is not None
     assert EnterpriseAnnotator is not None
-    assert UPSCImprovementEngine is not None
+    assert PDFAccessibilityEngine is not None
