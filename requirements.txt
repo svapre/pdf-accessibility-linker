@@ -1,0 +1,8 @@
+google-genai
+PyMuPDF
+PyYAML
+pydantic
+rapidfuzz
+spacy
+tqdm
+python-dotenv

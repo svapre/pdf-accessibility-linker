@@ -1,0 +1,44 @@
+pipeline_tuning:
+  # Tightness of typographic page clustering. Lower = more clusters, higher = fewer.
+  # Recommended range: 0.08 - 0.20. Default: 0.15
+  clustering_distance_threshold: 0.15
+
+  # Pages to scan for topology (printed page number detection).
+  # Default 9999 means full document. Reduce only for very large PDFs where speed matters.
+  topo_scan_limit: 9999
+
+  # Pages to scan for typographic cluster sampling.
+  # Default 9999 means full document. Controls which pages are sampled for the review packet.
+  cluster_scan_limit: 9999
+
+  # Minimum resolution score for a resolved reference to be injected as a hyperlink.
+  # Range: 0.0 - 1.0. Default: 0.75
+  min_link_confidence: 0.75
+
+  # Maximum pages to include in the manual review PDF packet sent to AI reviewer.
+  # Default: 15
+  max_review_packet_pages: 15
+
+  # Maximum documents grouped into a single manual review batch prompt.
+  # Keep at 3 to minimize AI attribution errors across visually similar books.
+  manual_review_batch_size: 3
+
+  # Page vector construction thresholds (multipliers relative to detected body_size)
+  # Giant: dominant decorative or chapter-number text
+  vector_giant_threshold: 3.0
+  # Large: chapter title or section header text  
+  vector_large_threshold: 1.8
+  # Medium: subheading or caption text
+  vector_medium_threshold: 1.1
+  # (body is everything below medium threshold)
+
+  # AI response validation
+  # Allowed values for element.relative_size field
+  allowed_relative_sizes:
+    - small
+    - medium
+    - large
+    - very_large
+    - giant
+  # Number of API retry attempts if response fails validation
+  api_retry_attempts: 1

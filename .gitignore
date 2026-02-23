@@ -1,0 +1,33 @@
+﻿# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+
+# Secrets
+.env
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Generated project artifacts
+input/
+inputs/
+output/
+outputs/
+logs/
+*.log
+
+# Generated runtime config artifacts
+config/manual_review/
+config/vocabulary_registry/
+config/*_rulebook.yaml
+
+# Keep base tuning config
+!config/app_settings.yaml
