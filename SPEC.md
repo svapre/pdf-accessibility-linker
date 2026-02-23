@@ -20,6 +20,7 @@ The following files must exist and be maintained:
 13. Test scaffolding under `tests/`
 14. Control gate validator at `scripts/control_gate.py`
 15. Process gate validator at `scripts/process_guard.py`
+16. User context profile at `docs/USER_CONTEXT.md`
 
 ## Required Commands (Local)
 All commands are run from repository root.
@@ -75,6 +76,10 @@ Zero-error state for this phase means:
 6. Process/control changes must include `docs/PROCESS_CHANGELOG.md` update in the same change set.
 7. Proposal files under `docs/proposals/` must include required sections defined by `scripts/process_guard.py`.
 8. During brainstorming, any suggested approach that violates `DESIGN.md` must be explicitly marked as a design violation with mitigation.
+9. Communication responses must follow `docs/USER_CONTEXT.md`:
+   - define terms on first mention
+   - expand acronyms on first use
+   - prefer plain language unless user requests technical depth
 
 ## Minimum Test Baseline
 Before readiness tag, test suite must include at least:

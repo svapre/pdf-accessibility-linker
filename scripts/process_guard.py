@@ -9,6 +9,7 @@ from pathlib import Path
 REQUIRED_PROCESS_FILES = [
     "GOVERNANCE.md",
     "DESIGN.md",
+    "docs/USER_CONTEXT.md",
     "docs/PROCESS_CHANGELOG.md",
     "docs/proposals/README.md",
     "docs/proposals/TEMPLATE.md",
@@ -24,6 +25,7 @@ PROCESS_CONTROLLED_FILES = {
     "SYSTEM.md",
     "GOVERNANCE.md",
     "DESIGN.md",
+    "docs/USER_CONTEXT.md",
     ".github/workflows/ci.yml",
     "scripts/control_gate.py",
     "scripts/process_guard.py",
