@@ -9,8 +9,8 @@ Build and stabilize a closed-loop engineering control system for this repository
 | 1 | Initialize Git + project skeleton | done | Git initialized, docs scaffolding created, initial commit made | Commit `58245dd` | Step 2 |
 | 2 | Define control-system architecture | done | `SYSTEM.md` and `SPEC.md` define measurable control targets | Commit `46d11a0` | Step 3 |
 | 3 | Build measurement and feedback tools | done | CI, tests, and lint configured and executable | Commit `65a0487` with workflow, config, and test scaffold | Step 4 |
-| 4 | Execute feedback loop to green | in_progress | Local checks pass and remote CI success exists for current `HEAD` | Local checks pass; remote CI evidence for current `HEAD` not yet established | Configure remote and push |
-| 5 | Tag readiness | blocked | `control-system-ready` tag points to `HEAD` and readiness gate passes | Existing tag points to `d59a1ab`, current `HEAD` is newer | Move tag after Step 4 passes |
+| 4 | Execute feedback loop to green | done | Local checks pass and remote CI success exists for current `HEAD` | Remote configured, CI green for hardened gate flow, local control gates passing | Step 5 |
+| 5 | Tag readiness | done | `control-system-ready` tag points to `HEAD` and readiness gate passes | Tag refreshed to current `HEAD`; `control_gate --mode readiness` passes | Closed-loop control foundation is active |
 
 ## Progress Log
 - Step 1 completed: initialized Git, added control-document scaffolding, and committed baseline (`58245dd`).
@@ -40,3 +40,8 @@ Build and stabilize a closed-loop engineering control system for this repository
     - no `origin` remote configured,
     - stale `control-system-ready` tag,
     - dirty worktree during in-progress edits.
+- Remote integration and stabilization cycle:
+  - Configured GitHub remote by creating `svapre/pdf-accessibility-linker` and pushing `master`.
+  - CI run on hardening commit initially failed (Linux import path issue), then fixed via `tests/conftest.py`.
+  - Subsequent CI run completed successfully for latest pushed code.
+  - Finalized readiness by enforcing strict gate criteria and refreshing readiness tag to latest `HEAD`.
