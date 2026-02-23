@@ -17,6 +17,7 @@ REQUIRED_FILES = [
     "AGENTS.md",
     "DESIGN.md",
     "GOVERNANCE.md",
+    "docs/USER_CONTEXT.md",
     "docs/PROCESS_CHANGELOG.md",
     "docs/proposals/README.md",
     "docs/proposals/TEMPLATE.md",

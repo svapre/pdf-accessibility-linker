@@ -9,7 +9,8 @@ This file tells autonomous coding agents where project control documents live an
 3. `SYSTEM.md` - control-loop architecture (sensors, controller actions, termination).
 4. `DESIGN.md` - design guardrails for ideas and implementation.
 5. `GOVERNANCE.md` - process requirements for proposals and process changes.
-6. `docs/` - supporting runbooks, proposals, and change logs.
+6. `docs/USER_CONTEXT.md` - user background and communication preferences.
+7. `docs/` - supporting runbooks, proposals, and change logs.
 
 ## Update Rules
 1. Update `MASTER_PLAN.md` after each meaningful step.
@@ -25,6 +26,11 @@ This file tells autonomous coding agents where project control documents live an
    - Why violations are accepted (if any)
    - Mitigation steps
 9. If an answer depends on assumptions or missing evidence, mark it `UNKNOWN` and do not present it as confirmed.
+10. Use plain language by default:
+   - Expand acronyms on first use (example: Pull Request (PR))
+   - Briefly define version-control and industry terms before using them
+   - Avoid unexplained jargon unless the user asks for technical depth
+11. Follow `docs/USER_CONTEXT.md` communication preferences in both implementation and brainstorming turns.
 
 ## Locations
 - Core app code: `core/`, `data_models/`, `utils/`, `main.py`

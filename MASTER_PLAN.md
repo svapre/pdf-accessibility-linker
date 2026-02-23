@@ -62,3 +62,7 @@ Build and stabilize a closed-loop engineering control system for this repository
     - `.\\venv\\Scripts\\python.exe -m pytest -q` passed.
     - `.\\venv\\Scripts\\python.exe scripts/process_guard.py --mode ci` passed.
     - `.\\venv\\Scripts\\python.exe scripts/control_gate.py --mode ci` passed.
+- Communication-context hardening:
+  - Added `docs/USER_CONTEXT.md` to persist user background and response-style requirements.
+  - Updated `AGENTS.md`, `GOVERNANCE.md`, and `SPEC.md` to require plain-language explanations and acronym/term definitions.
+  - Updated `docs/PROCESS_CHANGELOG.md` and `docs/README.md` to track/discover communication policy artifacts.

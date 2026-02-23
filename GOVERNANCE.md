@@ -32,3 +32,9 @@ The default branch should only receive merges that pass:
 2. `scripts/control_gate.py --mode ci`
 3. `scripts/process_guard.py --mode ci`
 
+## Communication Contract
+For this repository, communication quality is part of process quality.
+1. Responses must follow `docs/USER_CONTEXT.md`.
+2. Technical terms and acronyms must be defined at first mention unless the user asks for concise expert shorthand.
+3. If a recommendation violates `DESIGN.md` guardrails, the violation and mitigation must be stated in plain language.
+
