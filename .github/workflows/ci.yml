@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -26,6 +28,11 @@ jobs:
 
       - name: Test
         run: pytest -q
+
+      - name: Process Guard (CI Mode)
+        env:
+          BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+        run: python scripts/process_guard.py --mode ci --base-sha "${BASE_SHA}"
 
       - name: Control Gate (CI Mode)
         run: python scripts/control_gate.py --mode ci
