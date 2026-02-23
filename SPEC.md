@@ -1,7 +1,7 @@
 # Engineering Spec
 
 ## Scope
-This specification defines measurable acceptance criteria for the repository control system setup phase.
+This specification defines measurable acceptance criteria for the repository control system setup and governance hardening phase.
 
 ## Required Artifacts
 The following files must exist and be maintained:
@@ -9,10 +9,17 @@ The following files must exist and be maintained:
 2. `AGENTS.md`
 3. `SYSTEM.md`
 4. `SPEC.md`
-5. CI workflow at `.github/workflows/ci.yml`
-6. Lint and test configuration (`pyproject.toml` or equivalent)
-7. Test scaffolding under `tests/`
-8. Control gate validator at `scripts/control_gate.py`
+5. `DESIGN.md`
+6. `GOVERNANCE.md`
+7. `docs/PROCESS_CHANGELOG.md`
+8. `docs/proposals/README.md`
+9. `docs/proposals/TEMPLATE.md`
+10. CI workflow at `.github/workflows/ci.yml`
+11. PR template at `.github/pull_request_template.md`
+12. Lint and test configuration (`pyproject.toml` or equivalent)
+13. Test scaffolding under `tests/`
+14. Control gate validator at `scripts/control_gate.py`
+15. Process gate validator at `scripts/process_guard.py`
 
 ## Required Commands (Local)
 All commands are run from repository root.
@@ -29,13 +36,17 @@ All commands are run from repository root.
 - Command: `pytest -q`
 - Pass criteria: exit code `0`, no test failures or errors
 
-4. Control gate (readiness)
+4. Process guard
+- Command: `python scripts/process_guard.py --mode ci`
+- Pass criteria: exit code `0`
+
+5. Control gate (readiness)
 - Command: `python scripts/control_gate.py --mode readiness`
 - Pass criteria: exit code `0`
 
 ## CI Gate Criteria
 Primary gate:
-1. GitHub Actions workflow `.github/workflows/ci.yml` executes dependency install, lint, tests, and `python scripts/control_gate.py --mode ci` successfully.
+1. GitHub Actions workflow `.github/workflows/ci.yml` executes dependency install, lint, tests, `python scripts/process_guard.py --mode ci --base-sha <base>`, and `python scripts/control_gate.py --mode ci` successfully.
 
 No local fallback gate is allowed for declaring readiness.
 
@@ -58,6 +69,12 @@ Zero-error state for this phase means:
 2. Any change that causes required checks to fail must be corrected before continuing.
 3. `MASTER_PLAN.md` must be updated after each completed step with evidence.
 4. If readiness preconditions are missing (for example no remote origin or no successful CI run for `HEAD`), readiness cannot be marked complete.
+5. Implementation changes in `core/`, `data_models/`, `utils/`, or `main.py` must include:
+   - proposal update under `docs/proposals/`
+   - design-impact update in `DESIGN.md` or `docs/adr/`
+6. Process/control changes must include `docs/PROCESS_CHANGELOG.md` update in the same change set.
+7. Proposal files under `docs/proposals/` must include required sections defined by `scripts/process_guard.py`.
+8. During brainstorming, any suggested approach that violates `DESIGN.md` must be explicitly marked as a design violation with mitigation.
 
 ## Minimum Test Baseline
 Before readiness tag, test suite must include at least:
@@ -65,9 +82,11 @@ Before readiness tag, test suite must include at least:
 2. One utility contract test.
 3. One pipeline import/smoke test.
 4. One control-gate contract test.
+5. One process-gate contract test.
 
 ## Readiness Tag Criteria
 Tag `control-system-ready` may be created or moved only when:
 1. Steps 1-4 are complete and validated.
 2. `python scripts/control_gate.py --mode readiness` passes.
 3. Step 5 is marked complete in `MASTER_PLAN.md`.
+

@@ -15,9 +15,16 @@ REQUIRED_FILES = [
     "SPEC.md",
     "SYSTEM.md",
     "AGENTS.md",
+    "DESIGN.md",
+    "GOVERNANCE.md",
+    "docs/PROCESS_CHANGELOG.md",
+    "docs/proposals/README.md",
+    "docs/proposals/TEMPLATE.md",
     ".github/workflows/ci.yml",
+    ".github/pull_request_template.md",
     "pyproject.toml",
     "requirements-dev.txt",
+    "scripts/process_guard.py",
 ]
 
 
@@ -54,6 +61,7 @@ def check_local_commands() -> list[str]:
     cmds = [
         [sys.executable, "-m", "ruff", "check", "."],
         [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider"],
+        [sys.executable, "scripts/process_guard.py", "--mode", "ci"],
     ]
 
     for cmd in cmds:

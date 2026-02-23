@@ -11,6 +11,7 @@ Build and stabilize a closed-loop engineering control system for this repository
 | 3 | Build measurement and feedback tools | done | CI, tests, and lint configured and executable | Commit `65a0487` with workflow, config, and test scaffold | Step 4 |
 | 4 | Execute feedback loop to green | done | Local checks pass and remote CI success exists for current `HEAD` | Remote configured, CI green for hardened gate flow, local control gates passing | Step 5 |
 | 5 | Tag readiness | done | `control-system-ready` tag points to `HEAD` and readiness gate passes | Tag refreshed to current `HEAD`; `control_gate --mode readiness` passes | Closed-loop control foundation is active |
+| 6 | Harden process governance loop | done | Process guard enforces proposal/design/process coupling and is required in CI | Added `scripts/process_guard.py`, governance docs/templates, CI integration; local gates pass | Start feature planning under new guardrails |
 
 ## Progress Log
 - Step 1 completed: initialized Git, added control-document scaffolding, and committed baseline (`58245dd`).
@@ -45,3 +46,19 @@ Build and stabilize a closed-loop engineering control system for this repository
   - CI run on hardening commit initially failed (Linux import path issue), then fixed via `tests/conftest.py`.
   - Subsequent CI run completed successfully for latest pushed code.
   - Finalized readiness by enforcing strict gate criteria and refreshing readiness tag to latest `HEAD`.
+- Process governance hardening cycle:
+  - Added process gate script at `scripts/process_guard.py`.
+  - Added governance and design baselines (`GOVERNANCE.md`, `DESIGN.md`).
+  - Added required process artifacts:
+    - `docs/PROCESS_CHANGELOG.md`
+    - `docs/proposals/README.md`
+    - `docs/proposals/TEMPLATE.md`
+    - `.github/pull_request_template.md`
+  - Extended CI workflow to run process guard using base SHA.
+  - Extended control gate required artifacts to include governance/process files.
+  - Updated control docs (`AGENTS.md`, `SPEC.md`, `SYSTEM.md`) to enforce brainstorming and design-compliance expectations.
+  - Verification evidence (local):
+    - `.\\venv\\Scripts\\python.exe -m ruff check .` passed.
+    - `.\\venv\\Scripts\\python.exe -m pytest -q` passed.
+    - `.\\venv\\Scripts\\python.exe scripts/process_guard.py --mode ci` passed.
+    - `.\\venv\\Scripts\\python.exe scripts/control_gate.py --mode ci` passed.
