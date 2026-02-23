@@ -21,9 +21,33 @@ def test_implementation_change_with_required_design_artifacts_passes(tmp_path, m
                 "# Proposal",
                 "## Problem",
                 "## Options Considered",
-                "## Design Guardrails Check",
+                "## Design Parameter Compliance",
+                "- Structural correctness:",
+                "- Deterministic behavior:",
+                "- Traceable decisions:",
+                "- No silent guessing:",
+                "- Configuration over hardcoding:",
+                "- Idempotent processing:",
+                "- Fail loudly on invalid state:",
+                "- Performance budget awareness:",
+                "- Extensible module boundaries:",
+                "- Evidence-backed claims:",
+                "## Exception Register",
+                "- Violated parameter(s):",
+                "- Why alternatives are worse:",
+                "- Risk:",
+                "- Mitigation:",
+                "- Rollback plan:",
+                "## Decision Scorecard",
+                "- Correctness impact:",
+                "- Reliability impact:",
+                "- Complexity impact:",
+                "- Delivery speed impact:",
+                "- Operational risk:",
+                "- Why this is best overall now:",
                 "## Decision",
                 "## Risks and Mitigations",
+                "## Validation Plan",
             ]
         ),
         encoding="utf-8",
@@ -53,6 +77,13 @@ def test_process_change_with_changelog_update_passes():
     assert not failures
 
 
+def test_template_change_requires_process_changelog_update():
+    changed = {"docs/proposals/TEMPLATE.md"}
+    failures = evaluate_change_coupling(changed)
+
+    assert any("PROCESS_CHANGELOG" in item for item in failures)
+
+
 def test_proposal_sections_fail_when_required_headings_are_missing(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     proposal = Path("docs/proposals/2026-02-24-missing-sections.md")
@@ -74,9 +105,33 @@ def test_proposal_sections_pass_with_required_headings(tmp_path, monkeypatch):
                 "# Proposal",
                 "## Problem",
                 "## Options Considered",
-                "## Design Guardrails Check",
+                "## Design Parameter Compliance",
+                "- Structural correctness:",
+                "- Deterministic behavior:",
+                "- Traceable decisions:",
+                "- No silent guessing:",
+                "- Configuration over hardcoding:",
+                "- Idempotent processing:",
+                "- Fail loudly on invalid state:",
+                "- Performance budget awareness:",
+                "- Extensible module boundaries:",
+                "- Evidence-backed claims:",
+                "## Exception Register",
+                "- Violated parameter(s):",
+                "- Why alternatives are worse:",
+                "- Risk:",
+                "- Mitigation:",
+                "- Rollback plan:",
+                "## Decision Scorecard",
+                "- Correctness impact:",
+                "- Reliability impact:",
+                "- Complexity impact:",
+                "- Delivery speed impact:",
+                "- Operational risk:",
+                "- Why this is best overall now:",
                 "## Decision",
                 "## Risks and Mitigations",
+                "## Validation Plan",
             ]
         ),
         encoding="utf-8",

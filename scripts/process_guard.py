@@ -26,6 +26,9 @@ PROCESS_CONTROLLED_FILES = {
     "GOVERNANCE.md",
     "DESIGN.md",
     "docs/USER_CONTEXT.md",
+    "docs/proposals/README.md",
+    "docs/proposals/TEMPLATE.md",
+    ".github/pull_request_template.md",
     ".github/workflows/ci.yml",
     "scripts/control_gate.py",
     "scripts/process_guard.py",
@@ -39,9 +42,31 @@ PROPOSAL_IGNORED_FILES = {
 REQUIRED_PROPOSAL_SECTIONS = [
     "## Problem",
     "## Options Considered",
-    "## Design Guardrails Check",
+    "## Design Parameter Compliance",
+    "## Exception Register",
+    "## Decision Scorecard",
     "## Decision",
     "## Risks and Mitigations",
+    "## Validation Plan",
+]
+
+REQUIRED_PROPOSAL_FIELDS = [
+    "- Structural correctness:",
+    "- Deterministic behavior:",
+    "- Traceable decisions:",
+    "- No silent guessing:",
+    "- Configuration over hardcoding:",
+    "- Idempotent processing:",
+    "- Fail loudly on invalid state:",
+    "- Performance budget awareness:",
+    "- Extensible module boundaries:",
+    "- Evidence-backed claims:",
+    "- Violated parameter(s):",
+    "- Why alternatives are worse:",
+    "- Risk:",
+    "- Mitigation:",
+    "- Rollback plan:",
+    "- Why this is best overall now:",
 ]
 
 
@@ -133,6 +158,9 @@ def check_proposal_sections(proposal_files: list[str]) -> list[str]:
         for section in REQUIRED_PROPOSAL_SECTIONS:
             if section not in text:
                 failures.append(f"Proposal {path} missing required section: {section}")
+        for field in REQUIRED_PROPOSAL_FIELDS:
+            if field not in text:
+                failures.append(f"Proposal {path} missing required field marker: {field}")
     return failures
 
 

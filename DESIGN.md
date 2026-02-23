@@ -1,29 +1,53 @@
 # Design Guardrails
 
 ## Purpose
-This file is the design baseline used during brainstorming and implementation reviews.
+This file defines the design parameters used to evaluate ideas and implementation changes for the PDF accessibility project.
 
-## Guardrails
-1. Configuration over hardcoding:
-   - Environment-specific values, thresholds, and credentials must not be hardcoded in business logic.
-   - If a value must be fixed in code, document why.
+## Project Design Parameters
+1. Structural correctness first:
+   - Output PDF must remain valid and readable after bookmark/link changes.
+   - Accessibility improvements must not corrupt existing document content.
 
-2. Single source of truth for contracts:
-   - Shared identifiers and formats (for example URNs) must have one canonical implementation.
+2. Deterministic behavior:
+   - Same input PDF and same config must produce the same output.
 
-3. Deterministic core pipeline:
-   - Once inputs and configuration are fixed, pipeline behavior should be reproducible.
+3. Traceable decisions:
+   - Created bookmarks/links must be explainable from recorded evidence (logs, mappings, or proposal rationale).
 
-4. Fail loudly on invalid state:
-   - Invalid references, bounds, or mapping assumptions should raise or log explicit faults.
+4. No silent guessing:
+   - Ambiguous references should go to manual review or explicit skip with reason.
+   - Do not create links based on low-confidence guesses without documentation.
 
-5. Evidence-backed claims:
-   - Architecture and process claims must reference code, tests, or CI evidence.
+5. Configuration over hardcoding:
+   - Thresholds, matching rules, and environment-specific settings must come from config files.
+
+6. Idempotent processing:
+   - Re-running the same job should not duplicate links/bookmarks or progressively degrade output quality.
+
+7. Fail loudly on invalid state:
+   - Invalid references, impossible page targets, and schema mismatches must raise clear errors or explicit warnings.
+
+8. Performance budget awareness:
+   - Changes should state expected runtime/memory impact for representative document sizes.
+
+9. Extensible module boundaries:
+   - Parsing, indexing, matching, and annotation should remain separable to reduce coupling.
+
+10. Evidence-backed claims:
+    - Architecture/process claims must reference tests, CI, logs, or measurable checks.
+
+## Exception Rule
+A solution that violates one or more design parameters is allowed only if all are true:
+1. The violation is explicitly listed.
+2. Why alternatives are worse is documented.
+3. Risk, mitigation, and rollback are documented.
+4. The proposal scorecard still shows best overall outcome for current constraints.
 
 ## Brainstorming Protocol
-Every solution discussion should include:
-1. Guardrails satisfied
-2. Guardrails violated (if any)
-3. Why the chosen tradeoff is still acceptable
-4. Follow-up mitigation work
+Every solution discussion must include:
+1. Parameters satisfied
+2. Parameters violated (if any)
+3. Why violation is necessary (if any)
+4. Risk and mitigation
+5. Rollback plan
 

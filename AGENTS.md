@@ -25,12 +25,13 @@ This file tells autonomous coding agents where project control documents live an
    - Which guardrails are violated (if any)
    - Why violations are accepted (if any)
    - Mitigation steps
-9. If an answer depends on assumptions or missing evidence, mark it `UNKNOWN` and do not present it as confirmed.
-10. Use plain language by default:
+9. Accept solutions with design-parameter violations only when proposal evidence shows the option is best overall for current constraints.
+10. If an answer depends on assumptions or missing evidence, mark it `UNKNOWN` and do not present it as confirmed.
+11. Use plain language by default:
    - Expand acronyms on first use (example: Pull Request (PR))
    - Briefly define version-control and industry terms before using them
    - Avoid unexplained jargon unless the user asks for technical depth
-11. Follow `docs/USER_CONTEXT.md` communication preferences in both implementation and brainstorming turns.
+12. Follow `docs/USER_CONTEXT.md` communication preferences in both implementation and brainstorming turns.
 
 ## Locations
 - Core app code: `core/`, `data_models/`, `utils/`, `main.py`

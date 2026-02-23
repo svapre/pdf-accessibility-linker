@@ -1,40 +1,61 @@
 # Governance Rules
 
 ## Purpose
-This file defines how we make and validate engineering decisions, not just code changes.
+This file defines how decisions are made, validated, and approved by the human-AI team.
 
 ## Core Rule
-No significant code change is considered valid unless both are true:
-1. The code passes quality gates.
-2. The change process passes governance gates.
+No significant change is accepted unless both are true:
+1. Code quality gates pass.
+2. Process and design gates pass.
+
+## Human-AI Operating Model
+1. Human role:
+   - Set objectives, constraints, and approval boundaries.
+   - Approve or reject proposals and merges.
+
+2. AI role:
+   - Generate proposals, implement changes, run checks, and report evidence.
+   - Explicitly call out design violations and tradeoffs.
+
+3. Decision authority:
+   - Acceptance is evidence-based (tests/CI/gates), not trust-based.
+   - AI is execution-heavy, but not an approval authority.
+
+## Two Work Modes
+1. Design mode:
+   - Used for brainstorming and solution selection.
+   - Must include compliance against `DESIGN.md` parameters and an exception analysis.
+
+2. Execution mode:
+   - Used for coding, tests, CI fixes, and repository operations.
+   - Must follow proposal-first rules and pass automated gates.
 
 ## Proposal-First Workflow
 Before changing implementation files (`core/`, `main.py`, `data_models/`, `utils/`):
 1. Create or update a proposal in `docs/proposals/`.
-2. Include a design-compliance section in the proposal.
-3. List any intentional design violations and why they are accepted.
+2. Complete all mandatory template sections.
+3. Include design-parameter compliance and explicit exceptions (if any).
 
 ## Design Compliance Rule
-Every plan or proposed implementation must be checked against `DESIGN.md` guardrails.
-If an option violates a guardrail but is still the best tradeoff, explicitly mark:
-1. Violated guardrail
-2. Why violation is needed
-3. Risk and mitigation
+Every plan must be checked against `DESIGN.md`.
+If a plan violates a parameter, proposal must include:
+1. Violated parameter
+2. Reason alternatives are worse
+3. Risk, mitigation, and rollback
 
 ## Process-Change Rule
-If process files change (`SPEC.md`, `SYSTEM.md`, `AGENTS.md`, gate scripts, CI workflow):
+If process files change (`SPEC.md`, `SYSTEM.md`, `AGENTS.md`, gate scripts, CI workflow, governance/design docs):
 1. Update `docs/PROCESS_CHANGELOG.md` in the same branch.
 2. Explain what changed and why.
 
 ## Merge Rule
-The default branch should only receive merges that pass:
+Default branch may only receive merges where all pass:
 1. CI checks
 2. `scripts/control_gate.py --mode ci`
 3. `scripts/process_guard.py --mode ci`
 
 ## Communication Contract
-For this repository, communication quality is part of process quality.
-1. Responses must follow `docs/USER_CONTEXT.md`.
-2. Technical terms and acronyms must be defined at first mention unless the user asks for concise expert shorthand.
-3. If a recommendation violates `DESIGN.md` guardrails, the violation and mitigation must be stated in plain language.
+1. Follow `docs/USER_CONTEXT.md`.
+2. Define technical terms and acronyms on first use unless user asks for expert shorthand.
+3. Describe any design-parameter violation in plain language with mitigation.
 

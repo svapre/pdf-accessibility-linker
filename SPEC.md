@@ -75,8 +75,13 @@ Zero-error state for this phase means:
    - design-impact update in `DESIGN.md` or `docs/adr/`
 6. Process/control changes must include `docs/PROCESS_CHANGELOG.md` update in the same change set.
 7. Proposal files under `docs/proposals/` must include required sections defined by `scripts/process_guard.py`.
-8. During brainstorming, any suggested approach that violates `DESIGN.md` must be explicitly marked as a design violation with mitigation.
-9. Communication responses must follow `docs/USER_CONTEXT.md`:
+8. Proposal files must include:
+   - design-parameter compliance matrix
+   - exception register (with rollback)
+   - decision scorecard
+   - validation plan
+9. During brainstorming, any suggested approach that violates `DESIGN.md` must be explicitly marked as a design violation with mitigation.
+10. Communication responses must follow `docs/USER_CONTEXT.md`:
    - define terms on first mention
    - expand acronyms on first use
    - prefer plain language unless user requests technical depth
