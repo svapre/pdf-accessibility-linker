@@ -10,7 +10,7 @@ Build and stabilize a closed-loop engineering control system for this repository
 | 2 | Define control-system architecture | done | `SYSTEM.md` and `SPEC.md` define measurable control targets | Commit `46d11a0` | Step 3 |
 | 3 | Build measurement and feedback tools | done | CI, tests, and lint configured and executable | Commit `65a0487` with workflow, config, and test scaffold | Step 4 |
 | 4 | Execute feedback loop to green | done | Local/CI checks pass against `SPEC.md` | Local gates passed: pip install, `ruff check .`, `pytest -q`; workflow YAML parse passed | Step 5 |
-| 5 | Tag readiness | pending | `control-system-ready` tag created and recorded | Not started | Create tag after Step 4 commit |
+| 5 | Tag readiness | done | `control-system-ready` tag created and recorded | Tag `control-system-ready` at commit `HEAD` after this update | Closed-loop foundation complete |
 
 ## Progress Log
 - Step 1 completed: initialized Git, added control-document scaffolding, and committed baseline (`58245dd`).
@@ -27,4 +27,4 @@ Build and stabilize a closed-loop engineering control system for this repository
   - `ruff check .` passed.
   - `pytest -q` passed (5 tests).
   - CI workflow YAML parse check passed.
-- Next: commit Step 4 corrections and apply readiness tag in Step 5.
+- Step 5 completed: readiness state documented and tagged as `control-system-ready`.
