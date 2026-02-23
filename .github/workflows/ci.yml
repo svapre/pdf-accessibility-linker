@@ -1,4 +1,4 @@
-﻿name: ci
+name: ci
 
 on:
   push:
@@ -26,3 +26,6 @@ jobs:
 
       - name: Test
         run: pytest -q
+
+      - name: Control Gate (CI Mode)
+        run: python scripts/control_gate.py --mode ci
