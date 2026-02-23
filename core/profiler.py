@@ -3,6 +3,7 @@ import fitz
 import yaml
 import statistics
 import glob
+import json
 import re
 import logging
 import math
@@ -182,7 +183,7 @@ class EnterpriseProfiler:
             f'Distinct layout templates found by clustering: {n_clusters}\n\n'
             'Your task: identify the structural vocabulary and describe the layout schema '
             'of each template. Look for the template that functions as the chapter/section '
-            'opener — it will contain the largest font text, appear at regular intervals, '
+            'opener ??? it will contain the largest font text, appear at regular intervals, '
             'and introduce a new major section.\n\n'
             'IMPORTANT: If any text appears in the same large-font cluster as the chapter '
             'marker but does NOT introduce a chapter (e.g. TIMELINE, APPENDIX, CONCLUSION, '
@@ -466,8 +467,6 @@ class EnterpriseProfiler:
                     text = response.text.strip()
                     if text.startswith("```json"): text = text[7:-3].strip()
                     elif text.startswith("```"): text = text[3:-3].strip()
-                    
-                    import json
                     raw_result = json.loads(text)
                     validated_result = self._validate_and_correct_api_response(raw_result)
                     
@@ -940,7 +939,7 @@ class EnterpriseProfiler:
                 if min_v >= max_v: min_v, max_v = c['center'] - 0.1, c['center'] + 0.1
 
                 _primary_label = (struct_vocab.get('primary_marker') or 'chapter').strip().lower()
-                _secondary_label = 'subtopic' # TODO: Sprint 2 — replace with AI-derived role labels from layout_templates schema.
+                _secondary_label = 'subtopic' # TODO: Sprint 2 ??? replace with AI-derived role labels from layout_templates schema.
                 _level_label = _primary_label if i == 0 else f'{_secondary_label}_{i}'
 
                 hierarchy.append({

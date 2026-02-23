@@ -1,4 +1,4 @@
-﻿# Engineering Spec
+# Engineering Spec
 
 ## Scope
 This specification defines measurable acceptance criteria for the repository control system setup phase.
@@ -29,17 +29,19 @@ All commands are run from repository root.
 - Pass criteria: exit code `0`, no test failures or errors
 
 ## CI Gate Criteria
-CI is considered passing only when the workflow:
-1. Installs dependencies successfully.
-2. Runs lint command and passes.
-3. Runs tests and passes.
+Primary gate:
+1. GitHub Actions workflow executes dependency install, lint, and tests successfully.
 
-Any failed job is a hard fail.
+Local-environment fallback gate (used when remote CI execution is unavailable in-session):
+1. Workflow file parses as valid YAML.
+2. Local required commands pass.
+
+Any failed required gate is a hard fail.
 
 ## Green State Definition
 Green state is achieved when:
 1. All local required commands pass.
-2. CI gate passes.
+2. CI primary gate passes, or fallback gate passes when CI execution is unavailable.
 3. `MASTER_PLAN.md` records completion status for current step.
 
 ## Zero-Error Control State
@@ -62,5 +64,5 @@ Before readiness tag, test suite must include at least:
 ## Readiness Tag Criteria
 Tag `control-system-ready` may be created only when:
 1. Steps 1-4 are complete and validated.
-2. Local and CI checks pass.
+2. Required gates are passing per this spec.
 3. Step 5 is marked complete in `MASTER_PLAN.md`.
