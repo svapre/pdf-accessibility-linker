@@ -66,3 +66,9 @@ Build and stabilize a closed-loop engineering control system for this repository
   - Added `docs/USER_CONTEXT.md` to persist user background and response-style requirements.
   - Updated `AGENTS.md`, `GOVERNANCE.md`, and `SPEC.md` to require plain-language explanations and acronym/term definitions.
   - Updated `docs/PROCESS_CHANGELOG.md` and `docs/README.md` to track/discover communication policy artifacts.
+- Design-parameter hardening cycle:
+  - Expanded `DESIGN.md` with explicit project design parameters and exception rule.
+  - Updated `GOVERNANCE.md` with human-AI operating model and dual-mode workflow.
+  - Updated proposal contract (`docs/proposals/TEMPLATE.md`) with compliance matrix, exception register, decision scorecard, and validation plan.
+  - Strengthened `scripts/process_guard.py` and `tests/test_process_guard_contract.py` to enforce the upgraded proposal structure.
+  - Updated `SPEC.md`, `AGENTS.md`, and `docs/PROCESS_CHANGELOG.md` to align policy and enforcement.
