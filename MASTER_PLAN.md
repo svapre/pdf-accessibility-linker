@@ -83,3 +83,8 @@ Build and stabilize a closed-loop engineering control system for this repository
   - Released `control-loop-kit v0.2.1` with single-file human+AI onboarding and policy documentation.
   - Upgraded project submodule to `v0.2.1`.
   - Recorded adoption in `docs/PROCESS_CHANGELOG.md`.
+- Toolkit policy-governance adoption cycle:
+  - Released and adopted `control-loop-kit v0.3.0`.
+  - Adopted policy validation, partial/full override governance, and toolkit self-CI.
+  - Added explicit partial override directive to project `.control-loop/policy.json`.
+  - Recorded adoption in `docs/PROCESS_CHANGELOG.md`.

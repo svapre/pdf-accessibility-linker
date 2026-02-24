@@ -1,4 +1,7 @@
 {
+  "policy_override": {
+    "mode": "partial"
+  },
   "control_gate": {
     "required_files": [
       "MASTER_PLAN.md",
