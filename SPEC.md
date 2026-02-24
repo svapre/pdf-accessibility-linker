@@ -21,6 +21,7 @@ The following files must exist and be maintained:
 14. Control gate validator at `scripts/control_gate.py`
 15. Process gate validator at `scripts/process_guard.py`
 16. User context profile at `docs/USER_CONTEXT.md`
+17. Process policy file at `.control-loop/policy.json`
 
 ## Required Commands (Local)
 All commands are run from repository root.
@@ -79,12 +80,16 @@ Zero-error state for this phase means:
    - design-parameter compliance matrix
    - exception register (with rollback)
    - decision scorecard
+   - work mode declaration
+   - assumptions and unknowns section
+   - approval checkpoint with confirmation evidence marker
    - validation plan
 9. During brainstorming, any suggested approach that violates `DESIGN.md` must be explicitly marked as a design violation with mitigation.
 10. Communication responses must follow `docs/USER_CONTEXT.md`:
    - define terms on first mention
    - expand acronyms on first use
    - prefer plain language unless user requests technical depth
+11. If assumptions are non-`NONE`, proposal must require user confirmation before implementation.
 
 ## Minimum Test Baseline
 Before readiness tag, test suite must include at least:

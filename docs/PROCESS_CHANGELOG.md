@@ -30,3 +30,21 @@ This log tracks changes to control-system process, policy, and governance artifa
 - Extended process-controlled file list in `scripts/process_guard.py` to include proposal/process templates.
 - Updated `tests/test_process_guard_contract.py` for new proposal contract and process-change coverage.
 - Updated `SPEC.md` and `AGENTS.md` to reflect new acceptance and brainstorming constraints.
+
+## 2026-02-24 - Process extraction and policy-driven upgrade test
+- Created separate reusable process repository: `svapre/control-loop-kit`.
+- Integrated toolkit in this project as a pinned submodule: `tooling/control-loop-kit`.
+- Replaced local gate implementations with compatibility wrappers:
+  - `scripts/control_gate.py`
+  - `scripts/process_guard.py`
+- Updated CI checkout to initialize submodules.
+- Published toolkit `v0.2.0` with:
+  - policy-driven rules (`default_policy.json` + override support),
+  - work-mode enforcement (`routine`/`design`),
+  - ambiguity/no-assumption stop rule requiring confirmation evidence.
+- Added project policy override at `.control-loop/policy.json`.
+- Updated proposal template and governance/spec rules to include:
+  - work mode declaration,
+  - assumptions/unknowns,
+  - approval checkpoint and confirmation evidence.
+- Updated process-guard contract tests for new rule set.

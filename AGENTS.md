@@ -32,12 +32,22 @@ This file tells autonomous coding agents where project control documents live an
    - Briefly define version-control and industry terms before using them
    - Avoid unexplained jargon unless the user asks for technical depth
 12. Follow `docs/USER_CONTEXT.md` communication preferences in both implementation and brainstorming turns.
+13. Use explicit work modes:
+   - `routine` for low-risk implementation, lint/test, and repository operations
+   - `design` for architecture, tradeoff, and unclear requirements
+14. Ambiguity stop rule:
+   - If requirements are unclear and implementation would rely on assumptions, ask the user before coding.
+   - Do not proceed with assumption-based implementation unless user confirmation evidence is documented.
+15. Policy is configuration-driven:
+   - Read `.control-loop/policy.json` (or toolkit defaults) for process rules instead of hardcoding behavior.
 
 ## Locations
 - Core app code: `core/`, `data_models/`, `utils/`, `main.py`
 - Control docs: repository root + `docs/`
 - CI config: `.github/workflows/`
 - Tests: `tests/`
+- Process policy: `.control-loop/policy.json`
+- Shared toolkit submodule: `tooling/control-loop-kit`
 - Control gate script: `scripts/control_gate.py`
 - Process gate script: `scripts/process_guard.py`
 

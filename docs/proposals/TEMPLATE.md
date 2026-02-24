@@ -6,6 +6,10 @@ Describe the exact problem, affected files, and user impact.
 ## Options Considered
 List options considered, including at least one rejected alternative.
 
+## Work Mode
+- Selected work mode:
+- Why this mode:
+
 ## Design Parameter Compliance
 - Structural correctness:
 - Deterministic behavior:
@@ -32,6 +36,15 @@ List options considered, including at least one rejected alternative.
 - Delivery speed impact:
 - Operational risk:
 - Why this is best overall now:
+
+## Assumptions and Unknowns
+- Assumptions made:
+- Unknowns:
+- Clarifying questions for user:
+
+## Approval Checkpoint
+- User confirmation required before implementation:
+- User confirmation evidence:
 
 ## Decision
 State the selected option and why it is preferred now.

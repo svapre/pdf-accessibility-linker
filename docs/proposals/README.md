@@ -11,9 +11,12 @@ Example:
 ## Minimum Content
 Each proposal must be created from `docs/proposals/TEMPLATE.md` and include all required sections.
 At minimum this includes:
+- explicit work mode selection (`routine` or `design`)
 - design-parameter compliance matrix
 - exception register with rollback plan
 - decision scorecard
+- assumptions and unknowns section
+- approval checkpoint with confirmation evidence marker
 - validation plan
 
 ## Rule
