@@ -79,3 +79,7 @@ Build and stabilize a closed-loop engineering control system for this repository
   - Upgraded toolkit to `v0.2.0` and updated this project to consume it.
   - Adopted policy-driven configuration with `.control-loop/policy.json`.
   - Added ambiguity stop and work-mode constraints in proposal template, governance, and spec.
+- Toolkit documentation adoption cycle:
+  - Released `control-loop-kit v0.2.1` with single-file human+AI onboarding and policy documentation.
+  - Upgraded project submodule to `v0.2.1`.
+  - Recorded adoption in `docs/PROCESS_CHANGELOG.md`.
