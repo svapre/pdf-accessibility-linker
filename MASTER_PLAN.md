@@ -88,3 +88,7 @@ Build and stabilize a closed-loop engineering control system for this repository
   - Adopted policy validation, partial/full override governance, and toolkit self-CI.
   - Added explicit partial override directive to project `.control-loop/policy.json`.
   - Recorded adoption in `docs/PROCESS_CHANGELOG.md`.
+- AI-settings and session-evidence hardening cycle (in progress):
+  - Extending toolkit policy and process guard to load `.control-loop/ai_settings.json`.
+  - Adding global strict/advisory switch, context index model, and session evidence enforcement.
+  - Adding project-level AI settings file, context index, session templates, and a session log.

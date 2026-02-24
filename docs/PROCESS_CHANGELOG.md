@@ -64,3 +64,17 @@ This log tracks changes to control-system process, policy, and governance artifa
 - Added explicit project override directive in `.control-loop/policy.json`:
   - `"policy_override": { "mode": "partial" }`
 - Adopted toolkit self-CI and toolkit-level tests for policy/process enforcement.
+
+## 2026-02-24 - AI settings and session evidence enforcement
+- Added project AI settings file at `.control-loop/ai_settings.json`.
+- Added context-priority index at `docs/CONTEXT_INDEX.md`.
+- Added session evidence workflow:
+  - `docs/sessions/README.md`
+  - `docs/sessions/TEMPLATE.md`
+  - session log for this change
+- Updated policy required artifact lists to include AI settings, context index, and session docs.
+- Extended shared toolkit (submodule working tree) with:
+  - AI settings loader and schema validation,
+  - global strict/advisory process switch,
+  - session evidence checks in `process_guard`,
+  - reusable templates for AI settings/context/session files.

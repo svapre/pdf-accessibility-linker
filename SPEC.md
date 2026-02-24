@@ -22,6 +22,9 @@ The following files must exist and be maintained:
 15. Process gate validator at `scripts/process_guard.py`
 16. User context profile at `docs/USER_CONTEXT.md`
 17. Process policy file at `.control-loop/policy.json`
+18. AI settings file at `.control-loop/ai_settings.json`
+19. Context index file at `docs/CONTEXT_INDEX.md`
+20. Session docs at `docs/sessions/README.md` and `docs/sessions/TEMPLATE.md`
 
 ## Required Commands (Local)
 All commands are run from repository root.
@@ -90,6 +93,11 @@ Zero-error state for this phase means:
    - expand acronyms on first use
    - prefer plain language unless user requests technical depth
 11. If assumptions are non-`NONE`, proposal must require user confirmation before implementation.
+12. AI behavior must follow `.control-loop/ai_settings.json`.
+13. If changed files match session triggers from AI settings, a session log update under `docs/sessions/` is required.
+14. Global process switch behavior from AI settings must be honored:
+   - strict mode fails checks
+   - advisory/disabled mode warns with waiver metadata rules
 
 ## Minimum Test Baseline
 Before readiness tag, test suite must include at least:

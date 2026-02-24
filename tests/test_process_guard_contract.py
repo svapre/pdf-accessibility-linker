@@ -62,11 +62,43 @@ def test_implementation_change_with_required_design_artifacts_passes(tmp_path, m
         ),
         encoding="utf-8",
     )
+    session_log = Path("docs/sessions/2026-02-24-profiler-adjustment.md")
+    session_log.parent.mkdir(parents=True, exist_ok=True)
+    session_log.write_text(
+        "\n".join(
+            [
+                "# Session Log",
+                "## Request",
+                "- Session ID: test-session",
+                "- Selected work mode: design",
+                "- Task summary: profiler adjustment",
+                "## Planned Actions",
+                "- Files planned to change: core/profiler.py",
+                "- Why these changes: improve architecture",
+                "## User Approval",
+                "- User approval status: yes",
+                "- User approval evidence: approved in test setup",
+                "## AI Settings Applied",
+                "- confirm_before_changes: true",
+                "- assumption_policy: ask_first",
+                "- process_enforcement_mode: strict",
+                "## Execution Log",
+                "- Failure observed: none",
+                "- Corrective change made: n/a",
+                "- Validation checks run: pytest",
+                "## Results and Feedback",
+                "- Feedback received: none",
+                "- Feedback applied: none",
+            ]
+        ),
+        encoding="utf-8",
+    )
 
     changed = {
         "core/profiler.py",
         "docs/proposals/2026-02-24-profiler-adjustment.md",
         "docs/adr/2026-02-24-profiler-adjustment.md",
+        "docs/sessions/2026-02-24-profiler-adjustment.md",
     }
     failures = evaluate_change_coupling(changed)
 
@@ -217,3 +249,10 @@ def test_non_none_assumptions_require_confirmation_and_evidence(tmp_path, monkey
     failures = check_proposal_sections([proposal.as_posix()], load_policy())
 
     assert any("lists assumptions but does not require user confirmation" in item for item in failures)
+
+
+def test_implementation_change_requires_session_log_update():
+    changed = {"core/profiler.py", "docs/proposals/2026-02-24-profiler-adjustment.md", "docs/adr/2026-02-24.md"}
+    failures = evaluate_change_coupling(changed)
+
+    assert any("session log update" in item.lower() for item in failures)
