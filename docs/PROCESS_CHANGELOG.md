@@ -48,3 +48,10 @@ This log tracks changes to control-system process, policy, and governance artifa
   - assumptions/unknowns,
   - approval checkpoint and confirmation evidence.
 - Updated process-guard contract tests for new rule set.
+
+## 2026-02-24 - Toolkit documentation release adoption
+- Upgraded toolkit submodule from `v0.2.0` to `v0.2.1`.
+- Adopted toolkit docs release containing:
+  - `docs/CONTROL_TOOLKIT_GUIDE.md` (single-file human + AI onboarding),
+  - `docs/QUICKSTART.md` (manual integration steps),
+  - `docs/POLICY_SCHEMA.md` (policy structure reference).
