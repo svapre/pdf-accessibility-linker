@@ -55,3 +55,12 @@ This log tracks changes to control-system process, policy, and governance artifa
   - `docs/CONTROL_TOOLKIT_GUIDE.md` (single-file human + AI onboarding),
   - `docs/QUICKSTART.md` (manual integration steps),
   - `docs/POLICY_SCHEMA.md` (policy structure reference).
+
+## 2026-02-24 - Toolkit policy governance upgrade adoption
+- Upgraded toolkit submodule from `v0.2.1` to `v0.3.0`.
+- Adopted toolkit runtime policy validation and controlled override modes:
+  - partial override merge mode,
+  - full override mode with mandatory waiver metadata.
+- Added explicit project override directive in `.control-loop/policy.json`:
+  - `"policy_override": { "mode": "partial" }`
+- Adopted toolkit self-CI and toolkit-level tests for policy/process enforcement.
