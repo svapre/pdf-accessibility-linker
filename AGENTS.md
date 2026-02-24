@@ -9,8 +9,11 @@ This file tells autonomous coding agents where project control documents live an
 3. `SYSTEM.md` - control-loop architecture (sensors, controller actions, termination).
 4. `DESIGN.md` - design guardrails for ideas and implementation.
 5. `GOVERNANCE.md` - process requirements for proposals and process changes.
-6. `docs/USER_CONTEXT.md` - user background and communication preferences.
-7. `docs/` - supporting runbooks, proposals, and change logs.
+6. `.control-loop/policy.json` - project process policy overrides.
+7. `.control-loop/ai_settings.json` - AI behavior settings and global process switch.
+8. `docs/USER_CONTEXT.md` - user background and communication preferences.
+9. `docs/CONTEXT_INDEX.md` - context priority tiers to avoid context drift.
+10. `docs/` - supporting runbooks, proposals, session logs, and change logs.
 
 ## Update Rules
 1. Update `MASTER_PLAN.md` after each meaningful step.
@@ -40,6 +43,13 @@ This file tells autonomous coding agents where project control documents live an
    - Do not proceed with assumption-based implementation unless user confirmation evidence is documented.
 15. Policy is configuration-driven:
    - Read `.control-loop/policy.json` (or toolkit defaults) for process rules instead of hardcoding behavior.
+16. AI behavior is configuration-driven:
+   - Read `.control-loop/ai_settings.json` for response style, confirmation, and enforcement mode.
+17. If changed files match AI-settings session triggers, update `docs/sessions/` with approval and correction evidence.
+18. Treat design rule severities from policy as executable:
+   - `strict` -> hard fail
+   - `warn` -> warning
+   - `manual_review` -> add explicit review evidence if special-casing is used.
 
 ## Locations
 - Core app code: `core/`, `data_models/`, `utils/`, `main.py`
@@ -47,6 +57,7 @@ This file tells autonomous coding agents where project control documents live an
 - CI config: `.github/workflows/`
 - Tests: `tests/`
 - Process policy: `.control-loop/policy.json`
+- AI settings: `.control-loop/ai_settings.json`
 - Shared toolkit submodule: `tooling/control-loop-kit`
 - Control gate script: `scripts/control_gate.py`
 - Process gate script: `scripts/process_guard.py`

@@ -19,6 +19,9 @@ Define the closed-loop engineering control system for this repository. The loop 
 5. Process-gate sensor: `python scripts/process_guard.py --mode ci`.
 6. Repository state sensor: `git status --short` for dirty-state visibility.
 7. Policy sensor: `.control-loop/policy.json` loaded by gate scripts.
+8. AI settings sensor: `.control-loop/ai_settings.json` loaded through policy loader.
+9. Session evidence sensor: session logs under `docs/sessions/` when trigger paths change.
+10. Context-priority sensor: `docs/CONTEXT_INDEX.md`.
 
 ### Actuators (Corrections)
 1. Edit source/config/test files.
@@ -48,6 +51,11 @@ This project runs two linked loops:
 A change is accepted only when both loops are green.
 
 The gate implementation is consumed from shared repository `tooling/control-loop-kit` so the same process can be reused across projects.
+
+An additional communication-control loop is enforced through AI settings:
+1. user feedback updates response settings,
+2. session evidence proves approval and correction flow,
+3. process guard enforces compliance.
 
 ## Operating Modes
 1. Work mode `routine`: low-risk implementation and maintenance tasks.

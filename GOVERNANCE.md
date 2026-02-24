@@ -31,6 +31,7 @@ No significant change is accepted unless both are true:
    - Must follow proposal-first rules and pass automated gates.
 
 Mode selection and guard behavior are defined through `.control-loop/policy.json` so the process remains tool-agnostic and configurable.
+Response behavior and approval requirements are defined through `.control-loop/ai_settings.json`.
 
 ## Proposal-First Workflow
 Before changing implementation files (`core/`, `main.py`, `data_models/`, `utils/`):
@@ -51,10 +52,31 @@ If a plan violates a parameter, proposal must include:
 2. Reason alternatives are worse
 3. Risk, mitigation, and rollback
 
+## Rule Severity Modes
+Design/process checks can be configured per rule as:
+1. `strict` - fails checks automatically.
+2. `warn` - emits warning but does not fail.
+3. `manual_review` - flags human review; if marked as special-case, approval evidence is required.
+
+Projects can tune severity through `.control-loop/policy.json` without changing gate logic.
+
 ## Process-Change Rule
 If process files change (`SPEC.md`, `SYSTEM.md`, `AGENTS.md`, gate scripts, CI workflow, governance/design docs):
 1. Update `docs/PROCESS_CHANGELOG.md` in the same branch.
 2. Explain what changed and why.
+
+## Session Evidence Rule
+If changed files match AI-settings enforcement scope (for example implementation code, gate scripts, workflow files, policy files):
+1. Update a session log under `docs/sessions/`.
+2. Record planned changes, user approval evidence, failures, and corrective actions.
+3. Missing session evidence is a machine-check failure.
+
+## Global Switch Rule
+AI-settings include a global process switch:
+1. `enabled=true, mode=strict`: process failures block merge.
+2. `enabled=true, mode=advisory`: process failures become warnings.
+3. `enabled=false`: process failures become warnings and require waiver metadata.
+4. Default branch should run strict mode.
 
 ## Merge Rule
 Default branch may only receive merges where all pass:

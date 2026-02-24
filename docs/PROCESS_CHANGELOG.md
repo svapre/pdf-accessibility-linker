@@ -64,3 +64,60 @@ This log tracks changes to control-system process, policy, and governance artifa
 - Added explicit project override directive in `.control-loop/policy.json`:
   - `"policy_override": { "mode": "partial" }`
 - Adopted toolkit self-CI and toolkit-level tests for policy/process enforcement.
+
+## 2026-02-24 - AI settings and session evidence enforcement
+- Added project AI settings file at `.control-loop/ai_settings.json`.
+- Added context-priority index at `docs/CONTEXT_INDEX.md`.
+- Added session evidence workflow:
+  - `docs/sessions/README.md`
+  - `docs/sessions/TEMPLATE.md`
+  - session log for this change
+- Updated policy required artifact lists to include AI settings, context index, and session docs.
+- Extended shared toolkit (submodule working tree) with:
+  - AI settings loader and schema validation,
+  - global strict/advisory process switch,
+  - session evidence checks in `process_guard`,
+  - reusable templates for AI settings/context/session files.
+
+## 2026-02-24 - Model-catalog contract and prompt sync foundation
+- Updated toolkit submodule with contract-driven model-catalog artifacts:
+  - `contracts/model_catalog.contract.json` (source-of-truth format),
+  - `contracts/MODEL_CATALOG_PROMPT.md` (generated prompt for any AI),
+  - `scripts/generate_model_catalog_prompt.py` (generator + sync checker).
+- Added toolkit CI enforcement:
+  - `python scripts/generate_model_catalog_prompt.py --check`.
+- Added toolkit tests:
+  - `tests/test_model_catalog_contract.py` for route-candidate shape and prompt-sync assertions.
+- This is step 1 for model-switching refinement: lock format + prevent prompt drift before router runtime changes.
+
+## 2026-02-24 - Design robustness severity enforcement
+- Extended toolkit process guard with policy-driven rule severities:
+  - `strict` (hard fail),
+  - `warn` (warning),
+  - `manual_review` (explicit human review signal with evidence requirement when special-cases are declared).
+- Added policy-driven static guard checks for changed implementation code:
+  - strict failure on absolute path literals,
+  - manual-review signal on hardcoded PDF filename literals.
+- Added policy schema/validation support for:
+  - `process_guard.design_principle_rules`,
+  - `process_guard.static_guard_rules`.
+- Updated project design/process docs and proposal templates to include mechanical evidence for:
+  - generality scope,
+  - corpus and holdout validation,
+  - config externalization,
+  - determinism and idempotency.
+- Updated project and toolkit process-guard contract tests for the new field/rule set.
+
+## 2026-02-24 - Toolkit generic-boundary recovery and phase/scope gating
+- Corrected toolkit defaults to remain project-agnostic:
+  - changed generic markers to `- Validation coverage evidence:` and `- Single-case exception:`,
+  - removed PDF-project-specific default markers from toolkit policy.
+- Added execution-phase governance in toolkit process guard:
+  - enforced session markers for `- Workflow phase:`, `- Change scope:`, and `- Implementation approval token:`,
+  - enforced think-vs-implement boundaries with `scripts/process_guard.py --mode think|ci`.
+- Kept project-specific strict design/static rules only in this repository override:
+  - `.control-loop/policy.json` continues to define PDF-project-specific markers and strict/manual-review tuning.
+- Updated toolkit docs/tests to prevent regression:
+  - policy schema docs updated for phase rules and generic marker examples,
+  - added toolkit policy contract test asserting defaults stay project-agnostic.
+- Updated session template fields and aligned project/toolkit contract tests with new phase markers.
