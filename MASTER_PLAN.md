@@ -12,6 +12,7 @@ Build and stabilize a closed-loop engineering control system for this repository
 | 4 | Execute feedback loop to green | done | Local checks pass and remote CI success exists for current `HEAD` | Remote configured, CI green for hardened gate flow, local control gates passing | Step 5 |
 | 5 | Tag readiness | done | `control-system-ready` tag points to `HEAD` and readiness gate passes | Tag refreshed to current `HEAD`; `control_gate --mode readiness` passes | Closed-loop control foundation is active |
 | 6 | Harden process governance loop | done | Process guard enforces proposal/design/process coupling and is required in CI | Added `scripts/process_guard.py`, governance docs/templates, CI integration; local gates pass | Start feature planning under new guardrails |
+| 7 | Enforce AI settings + session evidence loop | done | AI settings are file-driven and process/session checks are machine-enforced | Commits `c556df0` (toolkit) and `4cb016a` (project); all local checks green | Continue with feature planning using strict mode |
 
 ## Progress Log
 - Step 1 completed: initialized Git, added control-document scaffolding, and committed baseline (`58245dd`).
@@ -88,7 +89,12 @@ Build and stabilize a closed-loop engineering control system for this repository
   - Adopted policy validation, partial/full override governance, and toolkit self-CI.
   - Added explicit partial override directive to project `.control-loop/policy.json`.
   - Recorded adoption in `docs/PROCESS_CHANGELOG.md`.
-- AI-settings and session-evidence hardening cycle (in progress):
-  - Extending toolkit policy and process guard to load `.control-loop/ai_settings.json`.
-  - Adding global strict/advisory switch, context index model, and session evidence enforcement.
-  - Adding project-level AI settings file, context index, session templates, and a session log.
+- AI-settings and session-evidence hardening cycle completed:
+  - Extended toolkit policy and process guard to load `.control-loop/ai_settings.json`.
+  - Added global strict/advisory switch, context index model, and session evidence enforcement.
+  - Added project-level AI settings file, context index, session templates, and session log.
+  - Validation evidence:
+    - `.\\venv\\Scripts\\python.exe -m ruff check .` passed.
+    - `.\\venv\\Scripts\\python.exe -m pytest -q` passed.
+    - `.\\venv\\Scripts\\python.exe scripts/process_guard.py --mode ci` passed.
+    - `.\\venv\\Scripts\\python.exe scripts/control_gate.py --mode ci` passed.
