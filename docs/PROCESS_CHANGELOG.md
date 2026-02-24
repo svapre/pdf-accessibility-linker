@@ -78,3 +78,14 @@ This log tracks changes to control-system process, policy, and governance artifa
   - global strict/advisory process switch,
   - session evidence checks in `process_guard`,
   - reusable templates for AI settings/context/session files.
+
+## 2026-02-24 - Model-catalog contract and prompt sync foundation
+- Updated toolkit submodule with contract-driven model-catalog artifacts:
+  - `contracts/model_catalog.contract.json` (source-of-truth format),
+  - `contracts/MODEL_CATALOG_PROMPT.md` (generated prompt for any AI),
+  - `scripts/generate_model_catalog_prompt.py` (generator + sync checker).
+- Added toolkit CI enforcement:
+  - `python scripts/generate_model_catalog_prompt.py --check`.
+- Added toolkit tests:
+  - `tests/test_model_catalog_contract.py` for route-candidate shape and prompt-sync assertions.
+- This is step 1 for model-switching refinement: lock format + prevent prompt drift before router runtime changes.

@@ -13,6 +13,7 @@ Build and stabilize a closed-loop engineering control system for this repository
 | 5 | Tag readiness | in_progress | `control-system-ready` tag points to `HEAD` and readiness gate passes | Reopened: new commits require fresh CI run and tag refresh for current `HEAD` | Push latest commits, verify CI success, then refresh readiness tag |
 | 6 | Harden process governance loop | done | Process guard enforces proposal/design/process coupling and is required in CI | Added `scripts/process_guard.py`, governance docs/templates, CI integration; local gates pass | Start feature planning under new guardrails |
 | 7 | Enforce AI settings + session evidence loop | done | AI settings are file-driven and process/session checks are machine-enforced | Commits `c556df0` (toolkit) and `4cb016a`/`319adf1` (project); all local checks green | Complete Step 5 readiness refresh after CI |
+| 8 | Add model-catalog contract sync loop | done | Contract-driven model catalog format and generated prompt stay synchronized by machine check | Toolkit commit `fd7992b`; local sync/lint/tests passed | Start model-routing runtime implementation |
 
 ## Progress Log
 - Step 1 completed: initialized Git, added control-document scaffolding, and committed baseline (`58245dd`).
@@ -102,3 +103,17 @@ Build and stabilize a closed-loop engineering control system for this repository
   - `.\\venv\\Scripts\\python.exe scripts/control_gate.py --mode readiness` failed as expected because:
     - CI has not run yet for current `HEAD`.
     - `control-system-ready` tag is stale and must be moved after CI passes.
+- Model-catalog contract sync loop completed:
+  - Added contract source of truth:
+    - `tooling/control-loop-kit/contracts/model_catalog.contract.json`
+  - Added generated prompt artifact and sync checker:
+    - `tooling/control-loop-kit/contracts/MODEL_CATALOG_PROMPT.md`
+    - `tooling/control-loop-kit/scripts/generate_model_catalog_prompt.py`
+  - Added toolkit CI check:
+    - `python scripts/generate_model_catalog_prompt.py --check`
+  - Added toolkit contract tests:
+    - `tooling/control-loop-kit/tests/test_model_catalog_contract.py`
+  - Validation evidence:
+    - `python scripts/generate_model_catalog_prompt.py --check` passed (toolkit root).
+    - `python -m ruff check .` passed (toolkit root).
+    - `python -m pytest -q` passed (toolkit root).
