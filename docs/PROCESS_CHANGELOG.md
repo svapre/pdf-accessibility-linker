@@ -107,3 +107,17 @@ This log tracks changes to control-system process, policy, and governance artifa
   - config externalization,
   - determinism and idempotency.
 - Updated project and toolkit process-guard contract tests for the new field/rule set.
+
+## 2026-02-24 - Toolkit generic-boundary recovery and phase/scope gating
+- Corrected toolkit defaults to remain project-agnostic:
+  - changed generic markers to `- Validation coverage evidence:` and `- Single-case exception:`,
+  - removed PDF-project-specific default markers from toolkit policy.
+- Added execution-phase governance in toolkit process guard:
+  - enforced session markers for `- Workflow phase:`, `- Change scope:`, and `- Implementation approval token:`,
+  - enforced think-vs-implement boundaries with `scripts/process_guard.py --mode think|ci`.
+- Kept project-specific strict design/static rules only in this repository override:
+  - `.control-loop/policy.json` continues to define PDF-project-specific markers and strict/manual-review tuning.
+- Updated toolkit docs/tests to prevent regression:
+  - policy schema docs updated for phase rules and generic marker examples,
+  - added toolkit policy contract test asserting defaults stay project-agnostic.
+- Updated session template fields and aligned project/toolkit contract tests with new phase markers.

@@ -32,9 +32,9 @@ def test_implementation_change_with_required_design_artifacts_passes(tmp_path, m
                 "- Configuration over hardcoding:",
                 "- Config externalization evidence: values loaded from config files",
                 "- Generality scope: chaptered textbooks and policy documents",
-                "- Corpus coverage evidence: validated on three representative PDFs",
+                "- Validation coverage evidence: validated on three representative documents",
                 "- Holdout validation evidence: one unseen PDF validated without failures",
-                "- Single-document special case: NONE",
+                "- Single-case exception: NONE",
                 "- Manual review evidence: N/A",
                 "- Determinism evidence: repeated run produced same output hash",
                 "- Idempotent processing:",
@@ -83,6 +83,9 @@ def test_implementation_change_with_required_design_artifacts_passes(tmp_path, m
                 "## Planned Actions",
                 "- Files planned to change: core/profiler.py",
                 "- Why these changes: improve architecture",
+                "- Workflow phase: implement",
+                "- Change scope: project",
+                "- Implementation approval token: APPROVE_IMPLEMENT",
                 "## User Approval",
                 "- User approval status: yes",
                 "- User approval evidence: approved in test setup",
@@ -166,9 +169,9 @@ def test_proposal_sections_pass_with_required_headings(tmp_path, monkeypatch):
                 "- Configuration over hardcoding:",
                 "- Config externalization evidence: values loaded from config files",
                 "- Generality scope: chaptered textbooks and policy documents",
-                "- Corpus coverage evidence: validated on three representative PDFs",
+                "- Validation coverage evidence: validated on three representative documents",
                 "- Holdout validation evidence: one unseen PDF validated without failures",
-                "- Single-document special case: NONE",
+                "- Single-case exception: NONE",
                 "- Manual review evidence: N/A",
                 "- Determinism evidence: repeated run produced same output hash",
                 "- Idempotent processing:",
@@ -231,9 +234,9 @@ def test_non_none_assumptions_require_confirmation_and_evidence(tmp_path, monkey
                 "- Configuration over hardcoding:",
                 "- Config externalization evidence: values loaded from config files",
                 "- Generality scope: chaptered textbooks and policy documents",
-                "- Corpus coverage evidence: validated on three representative PDFs",
+                "- Validation coverage evidence: validated on three representative documents",
                 "- Holdout validation evidence: one unseen PDF validated without failures",
-                "- Single-document special case: NONE",
+                "- Single-case exception: NONE",
                 "- Manual review evidence: N/A",
                 "- Determinism evidence: repeated run produced same output hash",
                 "- Idempotent processing:",
@@ -284,10 +287,29 @@ def test_implementation_change_requires_session_log_update():
 
 def test_static_guard_detects_absolute_path_literal_as_failure(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
+    policy = load_policy(repo_root=tmp_path)
+    static_cfg = policy.setdefault("process_guard", {}).setdefault("static_guard_rules", {})
+    static_cfg.update(
+        {
+            "enabled": True,
+            "scan_extensions": [".py"],
+            "include_prefixes": ["core/"],
+            "include_files": ["main.py"],
+            "rules": [
+                {
+                    "name": "absolute-path-literal",
+                    "pattern": r"[A-Za-z]:\\\\",
+                    "message": "absolute path literal detected; use config inputs instead",
+                    "enforcement": "strict",
+                }
+            ],
+        }
+    )
+
     core_file = Path("core/profiler.py")
     core_file.parent.mkdir(parents=True, exist_ok=True)
     core_file.write_text("BASE = 'C:\\\\temp\\\\pdfs'\n", encoding="utf-8")
 
-    failures = evaluate_change_coupling({core_file.as_posix()}, load_policy(repo_root=tmp_path))
+    failures = evaluate_change_coupling({core_file.as_posix()}, policy)
 
     assert any("absolute path literal" in item.lower() for item in failures)

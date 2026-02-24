@@ -8,6 +8,9 @@
 ## Planned Actions
 - Files planned to change: toolkit policy loader/guards, project policy/docs/tests, and supporting templates.
 - Why these changes: Enforce process discipline by machine instead of relying on agent memory.
+- Workflow phase: implement
+- Change scope: both
+- Implementation approval token: APPROVE_IMPLEMENT
 
 ## User Approval
 - User approval status: yes

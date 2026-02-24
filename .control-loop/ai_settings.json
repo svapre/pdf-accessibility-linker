@@ -39,7 +39,8 @@
       "data_models/",
       "utils/",
       "scripts/",
-      ".github/workflows/"
+      ".github/workflows/",
+      "tooling/control-loop-kit/"
     ],
     "required_for_files": [
       "main.py",
@@ -60,6 +61,9 @@
       "- Task summary:",
       "- Files planned to change:",
       "- Why these changes:",
+      "- Workflow phase:",
+      "- Change scope:",
+      "- Implementation approval token:",
       "- User approval status:",
       "- User approval evidence:",
       "- confirm_before_changes:",

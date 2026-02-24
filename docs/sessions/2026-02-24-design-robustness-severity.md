@@ -8,6 +8,9 @@
 ## Planned Actions
 - Files planned to change: toolkit policy + process guard + tests + docs, and project proposal/design/process docs/tests.
 - Why these changes: prevent one-off/band-aid fixes by enforcing robustness evidence and static hardcoding checks.
+- Workflow phase: implement
+- Change scope: both
+- Implementation approval token: APPROVE_IMPLEMENT
 
 ## User Approval
 - User approval status: yes

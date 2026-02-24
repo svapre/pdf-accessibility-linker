@@ -62,6 +62,37 @@
       "scripts/control_gate.py",
       "scripts/process_guard.py"
     ],
+    "project_guideline_fields": [
+      "- Structural correctness:",
+      "- Deterministic behavior:",
+      "- Traceable decisions:",
+      "- No silent guessing:",
+      "- Configuration over hardcoding:",
+      "- Config externalization evidence:",
+      "- Generality scope:",
+      "- Corpus coverage evidence:",
+      "- Holdout validation evidence:",
+      "- Single-document special case:",
+      "- Manual review evidence:",
+      "- Determinism evidence:",
+      "- Idempotent processing:",
+      "- Idempotency evidence:",
+      "- Fail loudly on invalid state:",
+      "- Performance budget awareness:",
+      "- Extensible module boundaries:",
+      "- Evidence-backed claims:",
+      "- Violated parameter(s):",
+      "- Why alternatives are worse:",
+      "- Risk:",
+      "- Mitigation:",
+      "- Rollback plan:",
+      "- Correctness impact:",
+      "- Reliability impact:",
+      "- Complexity impact:",
+      "- Delivery speed impact:",
+      "- Operational risk:",
+      "- Why this is best overall now:"
+    ],
     "default_branch": "master",
     "mode_rule": {
       "enabled": true,
@@ -76,6 +107,96 @@
       "assumptions_field": "- Assumptions made:",
       "confirmation_required_field": "- User confirmation required before implementation:",
       "confirmation_evidence_field": "- User confirmation evidence:"
+    },
+    "execution_phase_rules": {
+      "enabled": true,
+      "phase_field": "- Workflow phase:",
+      "change_scope_field": "- Change scope:",
+      "implementation_approval_token_field": "- Implementation approval token:",
+      "required_implementation_approval_token": "APPROVE_IMPLEMENT",
+      "allowed_phases": [
+        "think",
+        "implement"
+      ],
+      "allowed_scopes": [
+        "project",
+        "toolkit",
+        "both"
+      ],
+      "toolkit_prefixes": [
+        "tooling/control-loop-kit"
+      ]
+    },
+    "design_principle_rules": {
+      "null_tokens": [
+        "",
+        "none",
+        "n/a",
+        "na",
+        "tbd",
+        "todo"
+      ],
+      "manual_review_evidence_field": "- Manual review evidence:",
+      "required_value_rules": [
+        {
+          "field": "- Config externalization evidence:",
+          "enforcement": "strict"
+        },
+        {
+          "field": "- Generality scope:",
+          "enforcement": "strict"
+        },
+        {
+          "field": "- Corpus coverage evidence:",
+          "enforcement": "strict"
+        },
+        {
+          "field": "- Holdout validation evidence:",
+          "enforcement": "strict"
+        },
+        {
+          "field": "- Determinism evidence:",
+          "enforcement": "strict"
+        },
+        {
+          "field": "- Idempotency evidence:",
+          "enforcement": "strict"
+        },
+        {
+          "field": "- Single-document special case:",
+          "enforcement": "manual_review"
+        }
+      ]
+    },
+    "static_guard_rules": {
+      "enabled": true,
+      "scan_extensions": [
+        ".py"
+      ],
+      "include_prefixes": [
+        "core/",
+        "data_models/",
+        "utils/"
+      ],
+      "include_files": [
+        "main.py"
+      ],
+      "rules": [
+        {
+          "name": "absolute_path_literals",
+          "pattern": "(?:[A-Za-z]:\\\\\\\\|/Users/|/home/|/var/)",
+          "enforcement": "strict",
+          "message": "Detected absolute path literal in implementation code. Use config or environment paths.",
+          "ignore_case": false
+        },
+        {
+          "name": "hardcoded_pdf_filename_literals",
+          "pattern": "[\\\"'][^\\\"'\\n]+\\.pdf[\\\"']",
+          "enforcement": "manual_review",
+          "message": "Detected hardcoded PDF filename literal. Confirm this is not single-document overfitting.",
+          "ignore_case": true
+        }
+      ]
     }
   }
 }

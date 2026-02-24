@@ -15,6 +15,7 @@ Build and stabilize a closed-loop engineering control system for this repository
 | 7 | Enforce AI settings + session evidence loop | done | AI settings are file-driven and process/session checks are machine-enforced | Commits `c556df0` (toolkit) and `4cb016a`/`319adf1` (project); all local checks green | Complete Step 5 readiness refresh after CI |
 | 8 | Add model-catalog contract sync loop | done | Contract-driven model catalog format and generated prompt stay synchronized by machine check | Toolkit commit `fd7992b`; local sync/lint/tests passed | Start model-routing runtime implementation |
 | 9 | Add design robustness severity checks | done | No-hardcoding and generality evidence are mechanically checked with severity levels | Toolkit pending commit on top of `fd7992b`; project tests/gates green | Continue with external-AI intake controls |
+| 10 | Recover toolkit generic boundary + phase/scope enforcement | in_progress | Toolkit defaults remain project-agnostic, project-specific strictness stays in project override, and think-vs-implement rules are machine-enforced | Local toolkit and project checks both pass after recovery edits (`ruff`, `pytest`, `process_guard`, `control_gate`) | Commit toolkit and project recovery changes, push, and verify CI |
 
 ## Progress Log
 - Step 1 completed: initialized Git, added control-document scaffolding, and committed baseline (`58245dd`).
@@ -134,3 +135,11 @@ Build and stabilize a closed-loop engineering control system for this repository
   - Validation evidence:
     - project `ruff`, `pytest`, `process_guard --mode ci`, and `control_gate --mode ci` all passed.
     - toolkit `ruff` and `pytest` passed after the new rule set.
+- Recovery cycle for toolkit/project boundary correctness (current):
+  - Rebased toolkit default policy to generic markers (`Validation coverage evidence`, `Single-case exception`) and removed PDF-specific defaults.
+  - Added execution phase/scope/token enforcement in toolkit process guard (`think`/`implement`, project/toolkit scope).
+  - Kept PDF-project-specific strict rules in project override policy (`.control-loop/policy.json`) only.
+  - Updated toolkit and project contract tests to match generic defaults and explicit rule enabling in tests.
+  - Validation evidence:
+    - toolkit: `python -m ruff check .`, `python -m pytest -q` passed.
+    - project: `python -m ruff check .`, `python -m pytest -q`, `python scripts/process_guard.py --mode ci`, `python scripts/control_gate.py --mode ci` passed.

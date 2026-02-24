@@ -8,6 +8,9 @@
 ## Planned Actions
 - Files planned to change: toolkit contract/prompt scripts, toolkit tests/CI, project master plan, and process changelog.
 - Why these changes: prevent format drift and make future model-list collection reusable and machine-checked.
+- Workflow phase: implement
+- Change scope: both
+- Implementation approval token: APPROVE_IMPLEMENT
 
 ## User Approval
 - User approval status: yes
