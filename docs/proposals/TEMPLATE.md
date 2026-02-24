@@ -16,7 +16,15 @@ List options considered, including at least one rejected alternative.
 - Traceable decisions:
 - No silent guessing:
 - Configuration over hardcoding:
+- Config externalization evidence:
+- Generality scope:
+- Corpus coverage evidence:
+- Holdout validation evidence:
+- Single-document special case:
+- Manual review evidence:
+- Determinism evidence:
 - Idempotent processing:
+- Idempotency evidence:
 - Fail loudly on invalid state:
 - Performance budget awareness:
 - Extensible module boundaries:

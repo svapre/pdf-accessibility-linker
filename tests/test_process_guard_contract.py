@@ -30,7 +30,15 @@ def test_implementation_change_with_required_design_artifacts_passes(tmp_path, m
                 "- Traceable decisions:",
                 "- No silent guessing:",
                 "- Configuration over hardcoding:",
+                "- Config externalization evidence: values loaded from config files",
+                "- Generality scope: chaptered textbooks and policy documents",
+                "- Corpus coverage evidence: validated on three representative PDFs",
+                "- Holdout validation evidence: one unseen PDF validated without failures",
+                "- Single-document special case: NONE",
+                "- Manual review evidence: N/A",
+                "- Determinism evidence: repeated run produced same output hash",
                 "- Idempotent processing:",
+                "- Idempotency evidence: second run produced no additional bookmarks/links",
                 "- Fail loudly on invalid state:",
                 "- Performance budget awareness:",
                 "- Extensible module boundaries:",
@@ -156,7 +164,15 @@ def test_proposal_sections_pass_with_required_headings(tmp_path, monkeypatch):
                 "- Traceable decisions:",
                 "- No silent guessing:",
                 "- Configuration over hardcoding:",
+                "- Config externalization evidence: values loaded from config files",
+                "- Generality scope: chaptered textbooks and policy documents",
+                "- Corpus coverage evidence: validated on three representative PDFs",
+                "- Holdout validation evidence: one unseen PDF validated without failures",
+                "- Single-document special case: NONE",
+                "- Manual review evidence: N/A",
+                "- Determinism evidence: repeated run produced same output hash",
                 "- Idempotent processing:",
+                "- Idempotency evidence: second run produced no additional bookmarks/links",
                 "- Fail loudly on invalid state:",
                 "- Performance budget awareness:",
                 "- Extensible module boundaries:",
@@ -213,7 +229,15 @@ def test_non_none_assumptions_require_confirmation_and_evidence(tmp_path, monkey
                 "- Traceable decisions:",
                 "- No silent guessing:",
                 "- Configuration over hardcoding:",
+                "- Config externalization evidence: values loaded from config files",
+                "- Generality scope: chaptered textbooks and policy documents",
+                "- Corpus coverage evidence: validated on three representative PDFs",
+                "- Holdout validation evidence: one unseen PDF validated without failures",
+                "- Single-document special case: NONE",
+                "- Manual review evidence: N/A",
+                "- Determinism evidence: repeated run produced same output hash",
                 "- Idempotent processing:",
+                "- Idempotency evidence: second run produced no additional bookmarks/links",
                 "- Fail loudly on invalid state:",
                 "- Performance budget awareness:",
                 "- Extensible module boundaries:",
@@ -256,3 +280,14 @@ def test_implementation_change_requires_session_log_update():
     failures = evaluate_change_coupling(changed)
 
     assert any("session log update" in item.lower() for item in failures)
+
+
+def test_static_guard_detects_absolute_path_literal_as_failure(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    core_file = Path("core/profiler.py")
+    core_file.parent.mkdir(parents=True, exist_ok=True)
+    core_file.write_text("BASE = 'C:\\\\temp\\\\pdfs'\n", encoding="utf-8")
+
+    failures = evaluate_change_coupling({core_file.as_posix()}, load_policy(repo_root=tmp_path))
+
+    assert any("absolute path literal" in item.lower() for item in failures)

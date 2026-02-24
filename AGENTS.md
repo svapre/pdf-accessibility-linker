@@ -46,6 +46,10 @@ This file tells autonomous coding agents where project control documents live an
 16. AI behavior is configuration-driven:
    - Read `.control-loop/ai_settings.json` for response style, confirmation, and enforcement mode.
 17. If changed files match AI-settings session triggers, update `docs/sessions/` with approval and correction evidence.
+18. Treat design rule severities from policy as executable:
+   - `strict` -> hard fail
+   - `warn` -> warning
+   - `manual_review` -> add explicit review evidence if special-casing is used.
 
 ## Locations
 - Core app code: `core/`, `data_models/`, `utils/`, `main.py`

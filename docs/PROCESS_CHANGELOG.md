@@ -89,3 +89,21 @@ This log tracks changes to control-system process, policy, and governance artifa
 - Added toolkit tests:
   - `tests/test_model_catalog_contract.py` for route-candidate shape and prompt-sync assertions.
 - This is step 1 for model-switching refinement: lock format + prevent prompt drift before router runtime changes.
+
+## 2026-02-24 - Design robustness severity enforcement
+- Extended toolkit process guard with policy-driven rule severities:
+  - `strict` (hard fail),
+  - `warn` (warning),
+  - `manual_review` (explicit human review signal with evidence requirement when special-cases are declared).
+- Added policy-driven static guard checks for changed implementation code:
+  - strict failure on absolute path literals,
+  - manual-review signal on hardcoded PDF filename literals.
+- Added policy schema/validation support for:
+  - `process_guard.design_principle_rules`,
+  - `process_guard.static_guard_rules`.
+- Updated project design/process docs and proposal templates to include mechanical evidence for:
+  - generality scope,
+  - corpus and holdout validation,
+  - config externalization,
+  - determinism and idempotency.
+- Updated project and toolkit process-guard contract tests for the new field/rule set.

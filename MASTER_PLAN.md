@@ -14,6 +14,7 @@ Build and stabilize a closed-loop engineering control system for this repository
 | 6 | Harden process governance loop | done | Process guard enforces proposal/design/process coupling and is required in CI | Added `scripts/process_guard.py`, governance docs/templates, CI integration; local gates pass | Start feature planning under new guardrails |
 | 7 | Enforce AI settings + session evidence loop | done | AI settings are file-driven and process/session checks are machine-enforced | Commits `c556df0` (toolkit) and `4cb016a`/`319adf1` (project); all local checks green | Complete Step 5 readiness refresh after CI |
 | 8 | Add model-catalog contract sync loop | done | Contract-driven model catalog format and generated prompt stay synchronized by machine check | Toolkit commit `fd7992b`; local sync/lint/tests passed | Start model-routing runtime implementation |
+| 9 | Add design robustness severity checks | done | No-hardcoding and generality evidence are mechanically checked with severity levels | Toolkit pending commit on top of `fd7992b`; project tests/gates green | Continue with external-AI intake controls |
 
 ## Progress Log
 - Step 1 completed: initialized Git, added control-document scaffolding, and committed baseline (`58245dd`).
@@ -117,3 +118,19 @@ Build and stabilize a closed-loop engineering control system for this repository
     - `python scripts/generate_model_catalog_prompt.py --check` passed (toolkit root).
     - `python -m ruff check .` passed (toolkit root).
     - `python -m pytest -q` passed (toolkit root).
+- Design robustness severity checks completed:
+  - Added policy-driven proposal evidence checks for generality/no-hardcoding claims with per-rule severity:
+    - `strict`, `warn`, `manual_review`.
+  - Added policy-driven static guard scan for changed implementation files:
+    - strict check for absolute path literals,
+    - manual-review signal for hardcoded PDF filename literals.
+  - Expanded proposal template and tests with:
+    - config externalization evidence,
+    - generality scope,
+    - corpus coverage evidence,
+    - holdout validation evidence,
+    - determinism and idempotency evidence,
+    - single-document special-case declaration and manual review evidence.
+  - Validation evidence:
+    - project `ruff`, `pytest`, `process_guard --mode ci`, and `control_gate --mode ci` all passed.
+    - toolkit `ruff` and `pytest` passed after the new rule set.

@@ -52,6 +52,14 @@ If a plan violates a parameter, proposal must include:
 2. Reason alternatives are worse
 3. Risk, mitigation, and rollback
 
+## Rule Severity Modes
+Design/process checks can be configured per rule as:
+1. `strict` - fails checks automatically.
+2. `warn` - emits warning but does not fail.
+3. `manual_review` - flags human review; if marked as special-case, approval evidence is required.
+
+Projects can tune severity through `.control-loop/policy.json` without changing gate logic.
+
 ## Process-Change Rule
 If process files change (`SPEC.md`, `SYSTEM.md`, `AGENTS.md`, gate scripts, CI workflow, governance/design docs):
 1. Update `docs/PROCESS_CHANGELOG.md` in the same branch.

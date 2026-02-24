@@ -98,6 +98,10 @@ Zero-error state for this phase means:
 14. Global process switch behavior from AI settings must be honored:
    - strict mode fails checks
    - advisory/disabled mode warns with waiver metadata rules
+15. Design principle rules in policy must support per-rule severity:
+   - `strict`, `warn`, `manual_review`
+16. Static guard rules must scan changed implementation files for hardcoding/overfitting signals defined in policy.
+17. Proposal design-evidence fields for generality and robustness must be non-empty for `strict` rules.
 
 ## Minimum Test Baseline
 Before readiness tag, test suite must include at least:

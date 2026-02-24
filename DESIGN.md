@@ -36,6 +36,10 @@ This file defines the design parameters used to evaluate ideas and implementatio
 10. Evidence-backed claims:
     - Architecture/process claims must reference tests, CI, logs, or measurable checks.
 
+11. Generality over one-off fixes:
+    - Changes should work for document classes, not only one known PDF.
+    - If a change is intentionally single-document or temporary, it must be declared, reviewed, and time-bounded.
+
 ## Exception Rule
 A solution that violates one or more design parameters is allowed only if all are true:
 1. The violation is explicitly listed.

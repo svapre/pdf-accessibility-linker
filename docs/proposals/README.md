@@ -13,6 +13,7 @@ Each proposal must be created from `docs/proposals/TEMPLATE.md` and include all 
 At minimum this includes:
 - explicit work mode selection (`routine` or `design`)
 - design-parameter compliance matrix
+- robustness evidence for generality and no-hardcoding claims
 - exception register with rollback plan
 - decision scorecard
 - assumptions and unknowns section
