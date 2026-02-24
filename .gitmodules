@@ -1,0 +1,3 @@
+[submodule "tooling/control-loop-kit"]
+	path = tooling/control-loop-kit
+	url = https://github.com/svapre/control-loop-kit.git

@@ -19,7 +19,7 @@ def test_find_successful_run_for_head_returns_matching_ci_run():
         },
     ]
 
-    hit = find_successful_run_for_head(runs, "abc")
+    hit = find_successful_run_for_head(runs, "abc", "ci")
 
     assert hit is not None
     assert hit["url"] == "https://example.invalid/2"
@@ -36,4 +36,4 @@ def test_find_successful_run_for_head_returns_none_when_no_match():
         }
     ]
 
-    assert find_successful_run_for_head(runs, "abc") is None
+    assert find_successful_run_for_head(runs, "abc", "ci") is None

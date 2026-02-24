@@ -1,0 +1,67 @@
+{
+  "control_gate": {
+    "required_files": [
+      "MASTER_PLAN.md",
+      "SPEC.md",
+      "SYSTEM.md",
+      "AGENTS.md",
+      "DESIGN.md",
+      "GOVERNANCE.md",
+      "docs/USER_CONTEXT.md",
+      "docs/PROCESS_CHANGELOG.md",
+      "docs/proposals/README.md",
+      "docs/proposals/TEMPLATE.md",
+      ".github/workflows/ci.yml",
+      ".github/pull_request_template.md",
+      "pyproject.toml",
+      "requirements-dev.txt",
+      ".control-loop/policy.json",
+      "scripts/process_guard.py"
+    ],
+    "ci_workflow_name": "ci",
+    "readiness_tag": "control-system-ready"
+  },
+  "process_guard": {
+    "required_process_files": [
+      "GOVERNANCE.md",
+      "DESIGN.md",
+      "docs/USER_CONTEXT.md",
+      "docs/PROCESS_CHANGELOG.md",
+      "docs/proposals/README.md",
+      "docs/proposals/TEMPLATE.md",
+      ".github/pull_request_template.md",
+      ".control-loop/policy.json"
+    ],
+    "process_controlled_files": [
+      "AGENTS.md",
+      "SPEC.md",
+      "SYSTEM.md",
+      "GOVERNANCE.md",
+      "DESIGN.md",
+      "docs/USER_CONTEXT.md",
+      "docs/proposals/README.md",
+      "docs/proposals/TEMPLATE.md",
+      ".github/pull_request_template.md",
+      ".github/workflows/ci.yml",
+      ".control-loop/policy.json",
+      "scripts/control_gate.py",
+      "scripts/process_guard.py"
+    ],
+    "default_branch": "master",
+    "mode_rule": {
+      "enabled": true,
+      "selected_mode_field": "- Selected work mode:",
+      "allowed_modes": [
+        "routine",
+        "design"
+      ]
+    },
+    "no_assumption_rule": {
+      "enabled": true,
+      "assumptions_field": "- Assumptions made:",
+      "confirmation_required_field": "- User confirmation required before implementation:",
+      "confirmation_evidence_field": "- User confirmation evidence:"
+    }
+  }
+}
+

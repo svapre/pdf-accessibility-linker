@@ -18,6 +18,7 @@ Define the closed-loop engineering control system for this repository. The loop 
 4. Control-gate sensor: `python scripts/control_gate.py --mode readiness`.
 5. Process-gate sensor: `python scripts/process_guard.py --mode ci`.
 6. Repository state sensor: `git status --short` for dirty-state visibility.
+7. Policy sensor: `.control-loop/policy.json` loaded by gate scripts.
 
 ### Actuators (Corrections)
 1. Edit source/config/test files.
@@ -46,11 +47,16 @@ This project runs two linked loops:
 
 A change is accepted only when both loops are green.
 
+The gate implementation is consumed from shared repository `tooling/control-loop-kit` so the same process can be reused across projects.
+
 ## Operating Modes
-1. Bootstrap mode: establish tooling and measurements (Steps 1-3 in `MASTER_PLAN.md`).
-2. Stabilization mode: iterate until full green state (Step 4).
-3. Readiness mode: verify CI success for `HEAD`, clean worktree, and fresh readiness tag (Step 5).
-4. Maintenance mode: future work must keep both loops green; regressions trigger return to stabilization mode.
+1. Work mode `routine`: low-risk implementation and maintenance tasks.
+2. Work mode `design`: architecture/tradeoff and unclear requirement analysis.
+3. If requirements are ambiguous, proposal must use `design` and record clarifying questions.
+4. Bootstrap mode: establish tooling and measurements (Steps 1-3 in `MASTER_PLAN.md`).
+5. Stabilization mode: iterate until full green state (Step 4).
+6. Readiness mode: verify CI success for `HEAD`, clean worktree, and fresh readiness tag (Step 5).
+7. Maintenance mode: future work must keep both loops green; regressions trigger return to stabilization mode.
 
 ## Termination Criteria
 Control loop is considered closed and stable when:

@@ -72,3 +72,10 @@ Build and stabilize a closed-loop engineering control system for this repository
   - Updated proposal contract (`docs/proposals/TEMPLATE.md`) with compliance matrix, exception register, decision scorecard, and validation plan.
   - Strengthened `scripts/process_guard.py` and `tests/test_process_guard_contract.py` to enforce the upgraded proposal structure.
   - Updated `SPEC.md`, `AGENTS.md`, and `docs/PROCESS_CHANGELOG.md` to align policy and enforcement.
+- Process extraction and upgrade-test cycle:
+  - Split reusable control-loop logic into dedicated repo `svapre/control-loop-kit`.
+  - Added toolkit as submodule at `tooling/control-loop-kit` and pinned version.
+  - Converted local gate scripts to compatibility wrappers that import toolkit modules.
+  - Upgraded toolkit to `v0.2.0` and updated this project to consume it.
+  - Adopted policy-driven configuration with `.control-loop/policy.json`.
+  - Added ambiguity stop and work-mode constraints in proposal template, governance, and spec.

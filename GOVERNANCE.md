@@ -30,11 +30,19 @@ No significant change is accepted unless both are true:
    - Used for coding, tests, CI fixes, and repository operations.
    - Must follow proposal-first rules and pass automated gates.
 
+Mode selection and guard behavior are defined through `.control-loop/policy.json` so the process remains tool-agnostic and configurable.
+
 ## Proposal-First Workflow
 Before changing implementation files (`core/`, `main.py`, `data_models/`, `utils/`):
 1. Create or update a proposal in `docs/proposals/`.
 2. Complete all mandatory template sections.
 3. Include design-parameter compliance and explicit exceptions (if any).
+4. Record selected work mode (`routine` or `design`) and assumptions/unknowns.
+
+## Ambiguity Stop Rule
+1. If implementation depends on unresolved assumptions, do not proceed directly to code.
+2. Ask clarifying questions and capture user confirmation evidence in proposal.
+3. Assumption-based implementation is allowed only after explicit confirmation.
 
 ## Design Compliance Rule
 Every plan must be checked against `DESIGN.md`.
